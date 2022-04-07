@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
 import Button from "../../UI/Button/Button";
-import "./CourseInput.css";
+import styles from "./CourseInput.module.css";
 
 // below styled component div uses prop invalid gotten from FormControl
 
-const FormControl = styled.div`
+/* const FormControl = styled.div`
   margin: 0.5rem 0;
 
   & label {
@@ -31,7 +30,7 @@ const FormControl = styled.div`
     background: #fad0ec;
     border-color: #8b005d;
   }
-`;
+`; */
 
 const CourseInput = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -55,14 +54,17 @@ const CourseInput = (props) => {
     props.onAddGoal(enteredValue);
   };
 
-  // FormControl has prop invalid, determined by value of isValid
+  // in commented, FormControl has prop invalid, determined by value of isValid
+  // in current, dynamic class is added with css module. If isValid is false, apply styles.invalid (invalid being the class in css)
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <FormControl invalid={!isValid}>
+      <div
+        className={`${styles["form-control"]} ${!isValid && styles.invalid}`}
+      >
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
-      </FormControl>
+      </div>
       <Button type="submit">Add Goal</Button>
     </form>
   );
