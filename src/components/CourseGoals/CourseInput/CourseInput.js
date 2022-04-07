@@ -5,7 +5,7 @@ import "./CourseInput.css";
 
 const CourseInput = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
-  const [isValid, setIsValid] = useState(true); // for validating user input
+  const [isValid, setIsValid] = useState(true); // for validating user input - if isvalid is not true, set class to invalid, which is in css
 
   const goalInputChangeHandler = (event) => {
     // as soon as text is entered, change isValid to true
@@ -27,16 +27,9 @@ const CourseInput = (props) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="form-control">
-        <label style={{ color: !isValid ? "red" : "black" }}>Course Goal</label>
-        <input
-          type="text"
-          style={{
-            background: !isValid ? "lightpink" : "transparent",
-            borderColor: !isValid ? "red" : "#ccc",
-          }}
-          onChange={goalInputChangeHandler}
-        />
+      <div className={`form-control ${!isValid ? "invalid" : ""}`}>
+        <label>Course Goal</label>
+        <input type="text" onChange={goalInputChangeHandler} />
       </div>
       <Button type="submit">Add Goal</Button>
     </form>
